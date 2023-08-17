@@ -1,5 +1,5 @@
 pipeline {
-    agent kubernetes
+    agent any
     container ('maven'){
     stages {
       stage('Static Analysis') {
