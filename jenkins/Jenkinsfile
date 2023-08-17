@@ -1,0 +1,16 @@
+pipeline {
+    agent kubernetes
+    container ('maven'){
+    stages {
+      stage('Static Analysis') {
+      steps{
+      withSonarQubeEnv('sonar') 
+      {
+        sh 'mvn clean package sonar:sonar'
+   	    echo 'Static Analysis Completed'
+      }
+      }
+    }
+}
+    }
+}
