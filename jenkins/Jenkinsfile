@@ -1,6 +1,5 @@
 pipeline {
-    agent any
-    container ('maven'){
+    agent maven
     stages {
       stage('Static Analysis') {
       steps{
@@ -13,4 +12,3 @@ pipeline {
     }
 }
     }
-}
