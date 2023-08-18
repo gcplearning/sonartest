@@ -1,7 +1,8 @@
 pipeline {
-    agent maven
+    node('maven')
     stages {
       stage('Static Analysis') {
+      container('maven'){
       steps{
       withSonarQubeEnv('sonar') 
       {
@@ -12,3 +13,4 @@ pipeline {
     }
 }
     }
+}
