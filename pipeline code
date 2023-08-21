@@ -1,0 +1,26 @@
+podTemplate(containers: [
+    containerTemplate(
+    name: 'maven', 
+    image: 'maven:3.8.6-jdk-11', 
+    command: 'sleep', 
+    args: '30d'
+ )
+ ]) {
+
+     node(POD_LABEL) {
+    stage('Get a Maven project') {
+    git url: 'https://github.com/gcplearning/sonartest.git', branch: 'main'
+    container('maven') {
+    
+    stage('sonar'){
+    withSonarQubeEnv('sonar') 
+    {
+    sh 'mvn clean package sonar:sonar'
+    echo 'Static Analysis Completed'
+}
+}
+ }
+ }
+
+ }
+}
